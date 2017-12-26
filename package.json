@@ -24,6 +24,7 @@
     "core-js": "^2.4.1",
     "principleware-fe-dependencies": "https://github.com/principleware/principleware-fe-dependencies.git",
     "principleware-fe-utilities": "https://github.com/principleware/principleware-fe-utilities.git",
+    "principleware-tinymce-tailor": "https://github.com/principleware/principleware-tinymce-tailor.git",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
