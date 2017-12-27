@@ -1,46 +1,65 @@
 /**
  * @fileOverview
  * Provides a class representing a finite state machine.
- * @name FSM.js
- * @module hypercom/state/FSM
  * @author Xiaolong Tang <xxlongtang@gmail.com>
  * @license Copyright @me
  */
 import * as dependencies from 'principleware-fe-dependencies';
-import * as ClassBuilder from 'principleware-tinymce-tailor/src/util/Class';
-import { ok as typeAssert, tyString } from 'principleware-fe-utilities/src/typing/type-checker';
 import { replace } from 'principleware-fe-utilities/src/tools/string';
 
-'use strict';
 // A set of helper functions
-const _ = dependencies.underscore,
-    StateMachine = dependencies['state-machine'],
-    isFunction = _.isFunction,
-    indexOf = _.indexOf,
-    without = _.without,
-    transitionKeyFormat = '{from}2{to}',
-    callbackKeyFormat = 'on{key}',
-    errorMessageFormat = 'event{name} from {from} to {to} fails. Error code: {code} and message: {msg} and args: {args}';
+const _ = dependencies.underscore;
+const StateMachine = dependencies['state-machine'];
+const indexOf = _.indexOf;
+const without = _.without;
+const transitionKeyFormat = '{from}2{to}';
+const errorMessageFormat = 'Transition {name} from {from} to {to} fails.';
+
+
+function captialize(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+interface IUnderlyImpl {
+    state: string;
+    is(stateName: string): boolean;
+    cannot(transitionName: string): boolean;
+    fire(transitionName: string): any;
+}
+
+interface ILifeCycleEvent {
+    transition: string;
+    from: string;
+    to: string;
+}
+
+type MethodCallbackType = (ILifeCycleEvent) => void;
+type ErrorHandlerType = (name: string, from: string, to: string) => void;
+
+interface IStateSpecification {
+    onEnterCallback?: MethodCallbackType;
+    onLeaveCallback?: MethodCallbackType;
+}
+
+interface ITransitionSpecification {
+    from: string;
+    to: string;
+    onBeforeCallback?: MethodCallbackType;
+    onAfterCallback?: MethodCallbackType;
+}
 
 /**
  * Builds a handler with necessary context information.
  * The resulting return value is a closure indeed.
- * @private
- * @function buildHandlerInClosure
- * @param {Object} context Instance of the state machine.
- * @param {String} key 
- * @returns {Function} 
  */
-function buildHandlerInClosure(context, key) {
+function buildHandlerInClosure(context: { [key: string]: Array<MethodCallbackType> }, key: string) {
     return function() {
-        var i, func, ourHandlers;
-        ourHandlers = context._handlers;
-        ourHandlers = ourHandlers[key];
+        const ourHandlers = context[key];
         if (!ourHandlers) {
             return;
         }
-        for (i = 0; i < ourHandlers.length; i++) {
-            func = ourHandlers[i];
+        for (let i = 0; i < ourHandlers.length; i++) {
+            const func = ourHandlers[i];
             func.apply(null, arguments);
         }
     };
@@ -48,23 +67,12 @@ function buildHandlerInClosure(context, key) {
 
 /**
  * Default error handler for the FSM.
- * @private
- * @function defaultErrorHandler
- * @param {String} eventName
- * @param {String} from
- * @param {String} to
- * @param {Array} args
- * @param {Number} errorCode
- * @param {String} errorMessage
  */
-function defaultErrorHandler(eventName, from, to, args, errorCode, errorMessage) {
-    var info = replace(errorMessageFormat, {
+function defaultErrorHandler(eventName: string, from: string, to: string): void {
+    const info = replace(errorMessageFormat, {
         name: eventName,
         from: from,
-        to: to,
-        code: errorCode,
-        msg: errorMessage,
-        args: args
+        to: to
     });
     console.log(info);
 }
@@ -81,308 +89,251 @@ function defaultErrorHandler(eventName, from, to, args, errorCode, errorMessage)
  * - Support for global exception handling
  * @class FSM
  */
-export const FiniteStateMachineCtor = ClassBuilder.extend({
-    Properties: 'impl',
-    /**
-     * constructor
-     * @private
-     * @function init
-     */
-    init: function() {
-        var self = this;
-        self._impl = null;
-        self._initState = null;
-        self._errorHandler = null;
-        self._stateConfiguration = {};
-        self._transitionConfiguration = {};
-        self._handlers = {};
-    },
+export class FiniteStateMachineCtor {
+
+    private _impl: IUnderlyImpl;
+    private _initState: string;
+    private _errorHandler: ErrorHandlerType;
+    private _stateConfiguration: { [key: string]: IStateSpecification };
+    private _transitionConfiguration: { [key: string]: ITransitionSpecification };
+    private _handlers: { [key: string]: Array<MethodCallbackType> };
+
+    constructor() {
+        this._impl = null;
+        this._initState = null;
+        this._errorHandler = null;
+        this._stateConfiguration = {};
+        this._transitionConfiguration = {};
+        this._handlers = {};
+    }
+
     /**
      * Checks if FSM is in configuration stage.
-     * @private 
-     * @function ensureConfigureStage
-     * @throws {} 
      */
-    ensureConfigureStage: function() {
+    private ensureConfigureStage() {
         if (this._impl) {
             throw new Error('State machine has started.');
         }
-    },
+    }
+
     /**
      * Checks if FSM is in running stage.
-     * @private
-     * @function ensureRunningStage
-     * @throws {} 
      */
-    ensureRunningStage: function() {
+    private ensureRunningStage() {
         if (!this._impl) {
             throw new Error('State machine has not yet started.');
         }
-    },
+    }
+
     /**
      * Defines the behavior when the FSM moves into a state by a transition.
-     * @callback FSM~stateCallback
-     * @param {String} event The event corresponding to the transition of states.
-     * @param {String} from The source of the transition.
-     * @param {String} to The target of the transition.
      */
-    /**
-     * Defines a new state and optionally a callback for this state.
-     * @function addState
-     * @param {String} name The state name.
-     * @param {FSM~stateCallback}[] callback The optional callback for this state.
-     * @return {Object} self
-     * @throws {Error} 
-     */
-    addState: function(name, callback) {
+    addState(name: string,
+        onEnterCallback?: MethodCallbackType,
+        onLeaveCallback?: MethodCallbackType) {
         // Pre-conditions
-        typeAssert(name, tyString);
         this.ensureConfigureStage();
-        var self = this,
-            stateConf = self._stateConfiguration;
+        const stateConf = this._stateConfiguration;
         if (stateConf[name]) {
             throw new Error('Redefined state: ' + name);
         }
-        stateConf[name] = { callback: callback };
-        return self;
-    },
+        stateConf[name] = {
+            onEnterCallback: onEnterCallback,
+            onLeaveCallback: onLeaveCallback
+        };
+        return this;
+    }
+
     /**
      * Defines the init state for the FSM.
-     * @function setInitState
-     * @param {String} name The init state.
-     * @return {Object} self
-     * @throws {} 
      */
-    setInitState: function(name) {
+    setInitState(name: string) {
         // Pre-conditions
-        typeAssert(name, tyString);
         this.ensureConfigureStage();
 
-        var self = this;
-        if (self._initState) {
-            throw new Error('Redefined init state: ' + self._initState);
+        if (this._initState) {
+            throw new Error('Redefined init state: ' + this._initState);
         }
-        self._initState = name;
-        return self;
-    },
-    /**
-     * Defines the behavior when the FSM moves from one state to another.
-     * @callback FSM~transitionCallback
-     * @param {String} event The event corresponding to the transition of states.
-     * @param {String} from The source of the transition.
-     * @param {String} to The target of the transition.
-     * @param {String} msg The message along with the transition.
-     */
+        this._initState = name;
+        return this;
+    }
+
     /**
      * Defines a new stransition.
-     * @function addTransition
-     * @param {String} from the source state for the new transition.
-     * @param {String} to the target for the new transition.
-     * @param {FSM~transitionCallback} callback the optional callback for this transition.
-     * @return {Object} self
-     * @throws {Error} 
      */
-    addTransition: function(from, to, callback) {
+    addTransition(from: string,
+        to: string,
+        onAfterCallback?: MethodCallbackType,
+        onBeforeCallback?: MethodCallbackType) {
         // Pre-condition
-        typeAssert(from, tyString);
-        typeAssert(to, tyString);
         this.ensureConfigureStage();
 
-        var self = this,
-            stateConf = self._stateConfiguration,
-            transitionConf = self._transitionConfiguration,
-            key;
+        const stateConf = this._stateConfiguration;
+        const transitionConf = this._transitionConfiguration;
         if (!stateConf[from]) {
             throw new Error('Undefined source state: ' + from);
         }
         if (!stateConf[to]) {
             throw new Error('Undefined target state: ' + to);
         }
-        key = replace(transitionKeyFormat, { from: from, to: to });
+        const key = replace(transitionKeyFormat, { from: from, to: to });
         if (transitionConf[key]) {
             throw new Error('Redefined transition: ' + from + ' -> ' + to);
         }
-        transitionConf[key] = { from: from, to: to, callback: callback };
-        return self;
-    },
+        transitionConf[key] = {
+            from: from, to: to,
+            onAfterCallback: onAfterCallback,
+            onBeforeCallback: onBeforeCallback
+        };
+        return this;
+    }
+
     /**
      * Starts the FSM. Note that this method must be invoked before
      * any method which may change the state of the FSM.
-     * @function start
-     * @return {Object} self
-     * @throws {} 
      */
-    start: function() {
+    start() {
 
         this.ensureConfigureStage();
         if (!this._initState) {
             throw new Error('Init state has not been defined.');
         }
 
-        var self = this,
-            handlers = self._handlers,
-            stateConf,
-            transitionConf,
-            events,
-            key,
-            element,
-            callbackName;
         // Definition
-        stateConf = self._stateConfiguration;
-        transitionConf = self._transitionConfiguration;
-        events = [];
-        for (key in transitionConf) {
-            element = transitionConf[key];
-            events.push({
-                name: key,
-                from: element.from,
-                to: element.to
+        const stateConf = this._stateConfiguration;
+        const transitionConf = this._transitionConfiguration;
+
+        const transitions: Array<{ name: string, from: string, to: string }> = [];
+        const methods: { [key: string]: MethodCallbackType } = {};
+
+        for (let k1 in transitionConf) {
+            const elem1 = transitionConf[k1];
+            transitions.push({
+                name: k1,
+                from: elem1.from,
+                to: elem1.to
             });
-            if (isFunction(element.callback)) {
-                handlers[key] = handlers[key] || [];
-                handlers[key].push(element.callback);
+
+            if (elem1.onAfterCallback) {
+                methods['onAfter' + captialize(k1)] = elem1.onAfterCallback;
             }
-        }
-        for (key in stateConf) {
-            element = stateConf[key];
-            if (isFunction(element.callback)) {
-                callbackName = replace(callbackKeyFormat, { key: key });
-                handlers[callbackName] = handlers[callbackName] || [];
-                handlers[callbackName].push(element.callback);
+            if (elem1.onBeforeCallback) {
+                methods['onBefore' + captialize(k1)] = elem1.onAfterCallback;
             }
-        }
-        self._impl = StateMachine.create({
-            initial: self._initState,
-            events: events,
-            error: self._errorHandler || defaultErrorHandler
-        });
-        handlers.onenterstate = [];
-        handlers.onexitstate = [];
-        for (key in handlers) {
-            self._impl[key] = buildHandlerInClosure(self, key);
         }
 
-        return self;
-    },
+        for (let k2 in stateConf) {
+            const elem2 = stateConf[k2];
+
+            if (elem2.onEnterCallback) {
+                methods['onEnter' + captialize(k2)] = elem2.onEnterCallback;
+            }
+            if (elem2.onLeaveCallback) {
+                methods['onLeave' + captialize(k2)] = elem2.onLeaveCallback;
+            }
+        }
+
+        const handlers = this._handlers;
+        handlers.onEnterState = [];
+        handlers.onLeaveState = [];
+
+        methods['onEnterState'] = buildHandlerInClosure(this._handlers, 'onEnterState');
+        methods['onLeaveState'] = buildHandlerInClosure(this._handlers, 'onLeaveState');
+
+        this._impl = new StateMachine({
+            init: this._initState,
+            transitions: transitions,
+            methods: methods,
+            onInvalidTransition: this._errorHandler || defaultErrorHandler
+        });
+        return this;
+    }
 
     /**
      * Registers a handler for enterstate
-     * @function onEnterState
-     * @param {Function} handler
-     * @throws {Error} 
      */
-    onEnterState: function(handler) {
-        var ourHandlers = this._handlers.onenterstate;
+    onEnterState(handler: MethodCallbackType) {
+        const ourHandlers = this._handlers.onEnterState;
         if (indexOf(ourHandlers, handler) >= 0) {
             throw new Error('Re-registering a hander!');
         }
         ourHandlers.push(handler);
         return this;
-    },
+    }
 
     /**
      * Registers a handler for exitstate
-     * @param {Function} handler 
-     * @throws {Error} 
      */
-    onExitState: function(handler) {
-        var ourHandlers = this._handlers.onexitstate;
+    onExitState(handler: MethodCallbackType) {
+        const ourHandlers = this._handlers.onLeaveState;
         if (indexOf(ourHandlers, handler) >= 0) {
             throw new Error('Registering a hander!');
         }
         ourHandlers.push(handler);
         return this;
-    },
+    }
 
     /**
      * Un-register a handler for enterstate 
-     * @param {Function} handler
      */
-    offEnterState: function(handler) {
-        var ourHandlers = this._handlers.onenterstate;
+    offEnterState(handler: MethodCallbackType) {
+        const ourHandlers = this._handlers.onEnterState;
         this._handlers.onenterstate = without(ourHandlers, handler);
         return this;
-    },
+    }
 
     /**
      * Un-register a handler for exitstate
-     * @param {Function} handler
      */
-    offExitState: function(handler) {
-        var ourHandlers = this._handlers.onexitstate;
+    offExitState(handler: MethodCallbackType) {
+        const ourHandlers = this._handlers.onLeaveState;
         this._handlers.onexitstate = without(ourHandlers, handler);
         return this;
-    },
+    }
 
     /**
      * Performs a transition to the given state.
      * This method also validate the transition.
-     * @function go
-     * @param {String} to The target state.
-     * @return {Object} self
-     * @throws {Error} 
      */
-    go: function(to) {
-        typeAssert(to, tyString);
+    go(to: string) {
         this.ensureRunningStage();
 
-        var self = this,
-            impl = self._impl,
-            stateConf,
-            currentState,
-            functionName,
-            func;
-        stateConf = self._stateConfiguration;
+        const stateConf = this._stateConfiguration;
         if (!stateConf[to]) {
             throw new Error('Go to undefined state: ' + to);
         }
-        if (impl.is(to)) {
+        if (this._impl.is(to)) {
             // TODO: check if the underlying implementation takes into account
             // moving from one state to itself
-            return self;
+            return this;
         }
-        currentState = impl.current;
-        functionName = replace(transitionKeyFormat, { from: currentState, to: to });
+        const currentState = this._impl.state;
+        const transitionName = replace(transitionKeyFormat, { from: currentState, to: to });
         // Validate if this transition is allowed or not
-        if (impl.cannot(functionName)) {
+        if (this._impl.cannot(transitionName)) {
             throw new Error('Transition is not allowed: ' + currentState + ' -> ' + to);
         }
         // Invoke this function
-        func = impl[functionName];
-        func.call(impl);
-        return self;
-    },
-    /**
-     * Defines the error handler for the FSM.
-     * @callback FSM~errorHandler
-     * @param {String} eventName
-     * @param {String} from
-     * @param {String} to
-     * @param {Array} args
-     * @param {Number} errorCode
-     * @param {String} errorMessage
-     */
+        this._impl.fire(transitionName);
+        return this;
+    }
+
     /**
      * Provides the error handler for the FSM.
-     * @function addErrorHandler
-     * @param {FSM~errorHandler} fn Error handler.
-     * @return {Object} self
-     * @throws {Error} 
      */
-    addErrorHandler: function(fn) {
+    addErrorHandler(fn: ErrorHandlerType) {
         this.ensureConfigureStage();
-        if (isFunction(fn)) {
-            this._errorHandler = fn;
-        }
+
+        this._errorHandler = fn;
+
         return this;
-    },
+    }
+
     /**
      * Returns the current state.
-     * @function current
-     * @returns {String} 
      */
-    current: function() {
+    current() {
         this.ensureRunningStage();
-        return this._impl.current;
+        return this._impl.state;
     }
-});
+}
