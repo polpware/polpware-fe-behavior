@@ -4351,8 +4351,8 @@ pretty-error@^2.0.2:
     utila "~0.4"
 
 "principleware-fe-dependencies@https://github.com/principleware/principleware-fe-dependencies.git":
-  version "1.0.1"
-  resolved "https://github.com/principleware/principleware-fe-dependencies.git#37ca02bf4289deea24b5df3a8a2c3d0a9744e663"
+  version "1.0.2"
+  resolved "https://github.com/principleware/principleware-fe-dependencies.git#46e652117bea350951cd4cefa82f616d369d2087"
   dependencies:
     backbone "^1.3.3"
     backbone.paginator "^2.0.6"
@@ -4363,9 +4363,9 @@ pretty-error@^2.0.2:
     meld "^1.3.2"
     model-js "^0.2.5"
 
-"principleware-fe-utilities@https://github.com/principleware/principleware-fe-utilities.git":
-  version "1.0.0"
-  resolved "https://github.com/principleware/principleware-fe-utilities.git#9b84a8e66444e96c863f933cf5118b96d74cfbaf"
+"principleware-fe-utilities@https://github.com/principleware/principleware-fe-utilities.git#package":
+  version "1.1.1"
+  resolved "https://github.com/principleware/principleware-fe-utilities.git#039a6692db9c8c5217cbb82ae974a3edc959a51c"
 
 "principleware-tinymce-tailor@https://github.com/principleware/principleware-tinymce-tailor.git":
   version "4.7.6"

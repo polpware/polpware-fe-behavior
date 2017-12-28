@@ -5,7 +5,7 @@
  * @license Copyright @me
  */
 import * as dependencies from 'principleware-fe-dependencies';
-import { replace } from 'principleware-fe-utilities/src/tools/string';
+import { replace as replaceStr } from 'principleware-fe-utilities/dist';
 
 // A set of helper functions
 const _ = dependencies.underscore;
@@ -69,7 +69,7 @@ function buildHandlerInClosure(context: { [key: string]: Array<MethodCallbackTyp
  * Default error handler for the FSM.
  */
 function defaultErrorHandler(eventName: string, from: string, to: string): void {
-    const info = replace(errorMessageFormat, {
+    const info = replaceStr(errorMessageFormat, {
         name: eventName,
         from: from,
         to: to
@@ -89,7 +89,7 @@ function defaultErrorHandler(eventName: string, from: string, to: string): void 
  * - Support for global exception handling
  * @class FSM
  */
-export class FiniteStateMachineCtor {
+export class FiniteStateMachine {
 
     private _impl: IUnderlyImpl;
     private _initState: string;
@@ -176,7 +176,7 @@ export class FiniteStateMachineCtor {
         if (!stateConf[to]) {
             throw new Error('Undefined target state: ' + to);
         }
-        const key = replace(transitionKeyFormat, { from: from, to: to });
+        const key = replaceStr(transitionKeyFormat, { from: from, to: to });
         if (transitionConf[key]) {
             throw new Error('Redefined transition: ' + from + ' -> ' + to);
         }
@@ -308,14 +308,16 @@ export class FiniteStateMachineCtor {
             return this;
         }
         const currentState = this._impl.state;
-        const transitionName = replace(transitionKeyFormat, { from: currentState, to: to });
+        const transitionName = replaceStr(transitionKeyFormat, { from: currentState, to: to });
         // Validate if this transition is allowed or not
         if (this._impl.cannot(transitionName)) {
             throw new Error('Transition is not allowed: ' + currentState + ' -> ' + to);
         }
+
         // Invoke this function
-        this._impl.fire(transitionName);
-        return this;
+        const func = this._impl[transitionName];
+        func.call(this._impl);
+        return self;
     }
 
     /**

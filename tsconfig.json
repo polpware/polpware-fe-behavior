@@ -1,19 +1,49 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ]
-  }
+    "compileOnSave": false,
+    "compilerOptions": {
+        "outDir": "./dist/out-tsc",
+        "baseUrl": "host",
+        "paths": {
+            "jquery": [
+                "../node_modules/jquery/dist/jquery.js"              
+            ],
+            "locache": [
+                "../node_modules/locache/build/locache.js"              
+            ],
+            "meld": [
+                "../node_modules/meld/meld.js"
+            ],
+            "backbone": [
+                "../node_modules/backbone/backbone.js"              
+            ],
+            "backbone-paginator": [
+                "../node_modules/backbone.paginator/lib/backbone.paginator.js"
+            ],
+            "underscore": [
+                "../node_modules/underscore/underscore.js"
+            ],
+            "constraintjs": [
+                "../node_modules/constraintjs/build/cjs.js"
+            ],
+            "data-flow": [
+                "../node_modules/model-js/dist/model.js"
+            ],
+            "state-machine": [
+                "../node_modules/javascript-state-machine/dist/state-machine.js"
+            ]
+        },      
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2017",
+            "dom"
+        ]
+    }
 }
