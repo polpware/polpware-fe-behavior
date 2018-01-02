@@ -13,6 +13,9 @@
             "meld": [
                 "../node_modules/meld/meld.js"
             ],
+            "when": [
+                "../node_modules/principleware-fe-dependencies/dummy.js"
+            ],
             "backbone": [
                 "../node_modules/backbone/backbone.js"              
             ],
