@@ -2,37 +2,37 @@
     "compileOnSave": false,
     "compilerOptions": {
         "outDir": "./dist/out-tsc",
-        "baseUrl": "host",
+        "baseUrl": "./",
         "paths": {
             "jquery": [
-                "../node_modules/jquery/dist/jquery.js"              
+                "./node_modules/jquery/dist/jquery.js"              
             ],
             "locache": [
-                "../node_modules/locache/build/locache.js"              
+                "./node_modules/locache/build/locache.js"              
             ],
             "meld": [
-                "../node_modules/meld/meld.js"
+                "./node_modules/meld/meld.js"
             ],
             "when": [
-                "../node_modules/principleware-fe-dependencies/dummy.js"
+                "./node_modules/polpware-fe-dependencies/dummy.js"
             ],
             "backbone": [
-                "../node_modules/backbone/backbone.js"              
+                "./node_modules/backbone/backbone.js"              
             ],
             "backbone-paginator": [
-                "../node_modules/backbone.paginator/lib/backbone.paginator.js"
+                "./node_modules/backbone.paginator/lib/backbone.paginator.js"
             ],
             "underscore": [
-                "../node_modules/underscore/underscore.js"
+                "./node_modules/underscore/underscore.js"
             ],
             "constraintjs": [
-                "../node_modules/constraintjs/build/cjs.js"
+                "./node_modules/constraintjs/build/cjs.js"
             ],
             "data-flow": [
-                "../node_modules/model-js/dist/model.js"
+                "./node_modules/model-js/dist/model.js"
             ],
             "state-machine": [
-                "../node_modules/javascript-state-machine/dist/state-machine.js"
+                "./node_modules/javascript-state-machine/dist/state-machine.js"
             ]
         },      
         "sourceMap": true,
