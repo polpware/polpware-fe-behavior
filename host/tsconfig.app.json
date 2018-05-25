@@ -10,6 +10,6 @@
         "**/*.spec.ts"
     ],
     "include": [
-        "../node_modules/principleware-fe-utilities/src/tools/str.ts"
+        "../node_modules/polpware-fe-utilities/src/tools/str.ts"
     ]
 }

@@ -1,5 +1,5 @@
 import { FiniteStateMachine } from './finite-state-machine';
-import * as tools from 'principleware-tinymce-tailor/src/util/Tools';
+import * as tools from 'polpware-tinymce-tailor/src/util/Tools';
 
 describe('can load js', () => {
 

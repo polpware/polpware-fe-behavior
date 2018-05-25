@@ -4,8 +4,8 @@
  * @author Xiaolong Tang <xxlongtang@gmail.com>
  * @license Copyright @me
  */
-import * as dependencies from 'principleware-fe-dependencies';
-import { replace as replaceStr } from 'principleware-fe-utilities/dist';
+import * as dependencies from 'polpware-fe-dependencies';
+import { replace as replaceStr } from 'polpware-fe-utilities/dist';
 
 // A set of helper functions
 const _ = dependencies.underscore;
