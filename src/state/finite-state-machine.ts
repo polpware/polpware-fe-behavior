@@ -4,8 +4,8 @@
  * @author Xiaolong Tang <xxlongtang@gmail.com>
  * @license Copyright @me
  */
-import * as dependencies from 'principleware-fe-dependencies';
-import { replace as replaceStr } from 'principleware-fe-utilities/dist';
+import * as dependencies from 'polpware-fe-dependencies';
+import { replace as replaceStr } from 'polpware-fe-utilities/dist';
 
 // A set of helper functions
 const _ = dependencies.underscore;
@@ -200,36 +200,41 @@ export class FiniteStateMachine {
         }
 
         // Definition
-        const stateConf = this._stateConfiguration;
-        const transitionConf = this._transitionConfiguration;
+        const stateConf: Object = this._stateConfiguration;
+        const transitionConf: Object = this._transitionConfiguration;
 
         const transitions: Array<{ name: string, from: string, to: string }> = [];
         const methods: { [key: string]: MethodCallbackType } = {};
 
-        for (let k1 in transitionConf) {
-            const elem1 = transitionConf[k1];
-            transitions.push({
-                name: k1,
-                from: elem1.from,
-                to: elem1.to
-            });
+        for (const k1 in transitionConf) {
+            if (transitionConf.hasOwnProperty(k1)) {
+                const elem1 = transitionConf[k1];
+                transitions.push({
+                    name: k1,
+                    from: elem1.from,
+                    to: elem1.to
+                });
 
-            if (elem1.onAfterCallback) {
-                methods['onAfter' + captialize(k1)] = elem1.onAfterCallback;
-            }
-            if (elem1.onBeforeCallback) {
-                methods['onBefore' + captialize(k1)] = elem1.onAfterCallback;
+                if (elem1.onAfterCallback) {
+                    methods['onAfter' + captialize(k1)] = elem1.onAfterCallback;
+                }
+                if (elem1.onBeforeCallback) {
+                    methods['onBefore' + captialize(k1)] = elem1.onAfterCallback;
+                }
             }
         }
 
-        for (let k2 in stateConf) {
-            const elem2 = stateConf[k2];
+        for (const k2 in stateConf) {
 
-            if (elem2.onEnterCallback) {
-                methods['onEnter' + captialize(k2)] = elem2.onEnterCallback;
-            }
-            if (elem2.onLeaveCallback) {
-                methods['onLeave' + captialize(k2)] = elem2.onLeaveCallback;
+            if (stateConf.hasOwnProperty(k2)) {
+                const elem2 = stateConf[k2];
+
+                if (elem2.onEnterCallback) {
+                    methods['onEnter' + captialize(k2)] = elem2.onEnterCallback;
+                }
+                if (elem2.onLeaveCallback) {
+                    methods['onLeave' + captialize(k2)] = elem2.onLeaveCallback;
+                }
             }
         }
 
@@ -274,7 +279,7 @@ export class FiniteStateMachine {
     }
 
     /**
-     * Un-register a handler for enterstate 
+     * Un-register a handler for enterstate
      */
     offEnterState(handler: MethodCallbackType) {
         const ourHandlers = this._handlers.onEnterState;
