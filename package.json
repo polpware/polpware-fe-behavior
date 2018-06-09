@@ -1,6 +1,6 @@
 {
     "name": "polpware-fe-behavior",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "license": "MIT",
     "scripts": {
         "ng": "ng",
@@ -11,9 +11,9 @@
         "e2e": "ng e2e"
     },
     "private": true,
-    "dependencies": {
+    "peerDependencies": {
         "polpware-fe-dependencies": "https://github.com/polpware/polpware-fe-dependencies.git",
-        "polpware-fe-utilities": "https://github.com/polpware/polpware-fe-utilities.git#2.x",
+        "polpware-fe-utilities": "https://github.com/polpware/polpware-fe-utilities.git",
         "polpware-tinymce-tailor": "https://github.com/polpware/polpware-tinymce-tailor.git"        
     },
     "devDependencies": {
