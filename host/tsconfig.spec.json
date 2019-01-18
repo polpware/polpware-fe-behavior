@@ -16,7 +16,7 @@
     "include": [
         "**/*.spec.ts",
         "**/*.d.ts",
-        "../node_modules/polpware-fe-data/src/**/*.ts",
-        "../node_modules/polpware-fe-mvc/src/**/*.ts"        
+        "../node_modules/@polpware/fe-data/src/**/*.ts",
+        "../node_modules/@polpware/fe-mvc/src/**/*.ts"        
     ]
 }
