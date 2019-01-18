@@ -1,10 +1,10 @@
-var gulp = require("gulp");
-var typedoc = require("gulp-typedoc");
-gulp.task("doc", function() {
-    return gulp
-        .src(["src/**/*.ts"])
+const { src, dest, parallel } = require('gulp');
+const typedoc = require("gulp-typedoc");
+
+function doc() {
+    return src(["src/**/*.ts"])
         .pipe(typedoc({
-            name: "Polpware typescript behavior (2.0.0)",            
+            name: "Polpware typescript behavior (3.0.0)",            
             out: "docs/",            
             
             module: "commonjs",
@@ -21,4 +21,7 @@ gulp.task("doc", function() {
             ]
             
         }));
-});
+}
+
+exports.doc = doc;
+exports.default = doc;
