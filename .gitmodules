@@ -1,0 +1,3 @@
+[submodule "deployment/polpware-fe-behavior"]
+	path = deployment/polpware-fe-behavior
+	url = https://github.com/polpware-frontend-modules/polpware-fe-behavior.git
