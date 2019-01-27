@@ -14,7 +14,7 @@
         "./node_modules/meld/meld.js"
       ],
       "when": [
-        "./node_modules/polpware-fe-dependencies/dummy.js"
+        "./node_modules/@polpware/fe-dependencies/dummy.js"
       ],
       "backbone": [
         "./node_modules/backbone/backbone.js"
