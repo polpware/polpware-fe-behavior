@@ -28,3 +28,11 @@ test:
 	echo $(PACKAGE_TARGETS)
 
 
+# deployment
+
+BuildDist := ./dist/polpware/fe-behavior
+BuildDoc := ./docs
+DeployTarget := ./deployment/polpware-fe-behavior
+
+include Makefile.deployment
+
