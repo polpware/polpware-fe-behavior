@@ -5,11 +5,11 @@
  * @license Copyright @me
  */
 import * as dependencies from '@polpware/fe-dependencies';
-import { replace as replaceStr } from '@polpware/fe-utilities/dist';
+import { replace as replaceStr } from '@polpware/fe-utilities';
 
 // A set of helper functions
 const _ = dependencies.underscore;
-const StateMachine = dependencies['state-machine'];
+const StateMachine = dependencies['statemachine'];
 const indexOf = _.indexOf;
 const without = _.without;
 const transitionKeyFormat = '{from}2{to}';
