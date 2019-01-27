@@ -34,12 +34,6 @@
       "state-machine": [
         "./node_modules/javascript-state-machine/dist/state-machine.js"
       ],
-      "fe-behavior": [
-        "dist/fe-behavior"
-      ],
-      "fe-behavior/*": [
-        "dist/fe-behavior/*"
-      ],
       "@polpware/fe-behavior": [
         "dist/polpware/fe-behavior"
       ],
