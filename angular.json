@@ -165,6 +165,41 @@
           }
         }
       }
+    },
+    "@polpware/fe-behavior": {
+      "root": "projects/polpware/fe-behavior",
+      "sourceRoot": "projects/polpware/fe-behavior/src",
+      "projectType": "library",
+      "prefix": "polp-fe-behavior",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/polpware/fe-behavior/tsconfig.lib.json",
+            "project": "projects/polpware/fe-behavior/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/polpware/fe-behavior/src/test.ts",
+            "tsConfig": "projects/polpware/fe-behavior/tsconfig.spec.json",
+            "karmaConfig": "projects/polpware/fe-behavior/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/polpware/fe-behavior/tsconfig.lib.json",
+              "projects/polpware/fe-behavior/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "fe-behavior-host"
