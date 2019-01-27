@@ -1,136 +1,171 @@
 {
-    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-    "version": 1,
-    "newProjectRoot": "projects",
-    "projects": {
-        "fe-behavior-host": {
-            "root": "",
-            "sourceRoot": "host",
-            "projectType": "application",
-            "prefix": "",
-            "schematics": {            
-                "@schematics/angular:component": {
-                    "styleext": "css"
-                }
-            },
-            "architect": {
-                "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
-                    "options": {
-                        "outputPath": "dist/fe-behavior-host",
-                        "index": "host/index.html",
-                        "main": "host/main.ts",
-                        "tsConfig": "host/tsconfig.app.json",
-                        "polyfills": "host/polyfills.ts",
-                        "assets": [
-                            "host/assets",
-                            "host/favicon.ico"
-                        ],
-                        "styles": [
-                            "host/styles.css"
-                        ],
-                        "scripts": []
-                    },
-                    "configurations": {
-                        "production": {
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "aot": true,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "buildOptimizer": true,
-                            "fileReplacements": [
-                                {
-                                    "replace": "host/environments/environment.ts",
-                                    "with": "host/environments/environment.prod.ts"
-                                }
-                            ],
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
-                    "options": {
-                        "browserTarget": "fe-behavior-host:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "fe-behavior-host:build:production"
-                        }
-                    }
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "fe-behavior-host:build"
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "host/test.ts",
-                        "karmaConfig": "host/karma.conf.js",
-                        "polyfills": "host/polyfills.ts",
-                        "tsConfig": "host/tsconfig.spec.json",
-                        "scripts": [],
-                        "styles": [
-                            "host/styles.css"
-                        ],
-                        "assets": [
-                            "host/assets",
-                            "host/favicon.ico"
-                        ]
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "host/tsconfig.app.json",
-                            "host/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                }
-            }
-        },
-        "fe-behavior-host-e2e": {
-            "root": "e2e/",
-            "sourceRoot": "",
-            "projectType": "application",
-            "architect": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "./protractor.conf.js",
-                        "devServerTarget": "fe-behavior-host:serve"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "e2e/tsconfig.e2e.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
-                    }
-                }
-            }
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "fe-behavior-host": {
+      "root": "",
+      "sourceRoot": "host",
+      "projectType": "application",
+      "prefix": "",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "css"
         }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/fe-behavior-host",
+            "index": "host/index.html",
+            "main": "host/main.ts",
+            "tsConfig": "host/tsconfig.app.json",
+            "polyfills": "host/polyfills.ts",
+            "assets": [
+              "host/assets",
+              "host/favicon.ico"
+            ],
+            "styles": [
+              "host/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "host/environments/environment.ts",
+                  "with": "host/environments/environment.prod.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fe-behavior-host:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "fe-behavior-host:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "fe-behavior-host:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "host/test.ts",
+            "karmaConfig": "host/karma.conf.js",
+            "polyfills": "host/polyfills.ts",
+            "tsConfig": "host/tsconfig.spec.json",
+            "scripts": [],
+            "styles": [
+              "host/styles.css"
+            ],
+            "assets": [
+              "host/assets",
+              "host/favicon.ico"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "host/tsconfig.app.json",
+              "host/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     },
-    "defaultProject": "fe-behavior-host"
+    "fe-behavior-host-e2e": {
+      "root": "e2e/",
+      "sourceRoot": "",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "./protractor.conf.js",
+            "devServerTarget": "fe-behavior-host:serve"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "fe-behavior": {
+      "root": "projects/fe-behavior",
+      "sourceRoot": "projects/fe-behavior/src",
+      "projectType": "library",
+      "prefix": "polp-fe-behavior",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fe-behavior/tsconfig.lib.json",
+            "project": "projects/fe-behavior/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fe-behavior/src/test.ts",
+            "tsConfig": "projects/fe-behavior/tsconfig.spec.json",
+            "karmaConfig": "projects/fe-behavior/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fe-behavior/tsconfig.lib.json",
+              "projects/fe-behavior/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "fe-behavior-host"
 }
