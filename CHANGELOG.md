@@ -1,3 +1,9 @@
+## 3.0.2 (January 30, 2019)
+  - Fix the use of polpware-tinymce-tailor
+  - Upgrade packages
+  - k
+  - Bump version
+
 ## 3.0.1 (January 27, 2019)
 
 
