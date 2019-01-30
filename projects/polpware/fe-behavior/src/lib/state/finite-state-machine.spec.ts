@@ -1,5 +1,7 @@
+import * as dependencies from '@polpware/fe-dependencies';
+
 import { FiniteStateMachine } from './finite-state-machine';
-import * as tools from 'polpware-tinymce-tailor/src/util/Tools';
+const tools = dependencies.Tools;
 
 describe('can load js', () => {
 
