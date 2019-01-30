@@ -317,8 +317,8 @@
     webpack-sources "1.2.0"
 
 "@polpware/fe-dependencies@https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git":
-  version "1.3.2"
-  resolved "https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git#cde6fc313065772762eb3b22125a7e03faff383f"
+  version "1.4.1"
+  resolved "https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git#cd9bb47709df6798b0703356f321359d01acc904"
   dependencies:
     backbone "^1.3.3"
     backbone.paginator "^2.0.8"
@@ -328,6 +328,7 @@
     locache "https://github.com/polpware/locache.git"
     meld "^1.3.2"
     model-js "^0.2.5"
+    polpware-tinymce-tailor "https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git"
     when "^3.7.8"
 
 "@polpware/fe-utilities@https://github.com/polpware-frontend-modules/polpware-fe-utilities.git":
