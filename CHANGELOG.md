@@ -1,3 +1,22 @@
+## 13.0.0 (April 29, 2022)
+  - k
+  - Fix script
+  - Fix tests
+  - Recover some packages
+  - Upgrade to Angular 13
+  - Upgrade to Angular 12
+  - Upgrade angular 11
+  - Upgrade to angular 10
+  - Upgrade to angular 9
+  - Fix package dependencies
+  - Upgrade to angular 8
+  - Fix packages
+  - Remove some dependencies for the following upgrade
+  - Use yarn v3
+  - Switch to yarn v3
+  - k
+  - Update package versions
+
 ## 3.0.2 (January 30, 2019)
   - Fix the use of polpware-tinymce-tailor
   - Upgrade packages
