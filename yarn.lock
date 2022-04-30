@@ -2005,6 +2005,7 @@ __metadata:
     karma-coverage-istanbul-reporter: ~3.0.2
     karma-jasmine: ~4.0.0
     karma-jasmine-html-reporter: ^1.5.0
+    moment: ^2.29.3
     ng-packagr: ^13.3.1
     polpware-tinymce-tailor: "https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git"
     protractor: ~7.0.0
@@ -9284,6 +9285,13 @@ __metadata:
   version: 0.2.5
   resolution: "model-js@npm:0.2.5"
   checksum: 2e0fbd5e027a52f4db32abe514a800c48ee1bb3097a573b54384727ece703b877f45085395bacda7b5b1daf95521f6005452cd81361837b95acea6ce411e191b
+  languageName: node
+  linkType: hard
+
+"moment@npm:^2.29.3":
+  version: 2.29.3
+  resolution: "moment@npm:2.29.3"
+  checksum: 2e780e36d9a1823c08a1b6313cbb08bd01ecbb2a9062095820a34f42c878991ccba53abaa6abb103fd5c01e763724f295162a8c50b7e95b4f1c992ef0772d3f0
   languageName: node
   linkType: hard
 
