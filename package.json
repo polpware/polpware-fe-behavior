@@ -14,11 +14,6 @@
         "bump": "gulp bump"
     },
     "private": true,
-    "peerDependencies": {
-        "@polpware/fe-dependencies": "*",
-        "@polpware/fe-utilities": "*",
-        "polpware-tinymce-tailor": "*"
-    },
     "devDependencies": {
         "@angular-devkit/build-angular": "~0.12.2",
         "@angular-devkit/build-ng-packagr": "~0.12.0",
@@ -34,8 +29,6 @@
         "@angular/platform-browser": "^7.2.1",
         "@angular/platform-browser-dynamic": "^7.2.1",
         "@angular/router": "^7.2.1",
-        "@polpware/fe-dependencies": "https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git",
-        "@polpware/fe-utilities": "https://github.com/polpware-frontend-modules/polpware-fe-utilities.git",
         "@types/jasmine": "3.3.6",
         "@types/node": "~10.12.18",
         "codelyzer": "^4.5.0",
@@ -54,7 +47,6 @@
         "karma-jasmine": "~2.0.1",
         "karma-jasmine-html-reporter": "^1.4.0",
         "ng-packagr": "^4.2.0",
-        "polpware-tinymce-tailor": "https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git",
         "protractor": "~5.4.2",
         "rxjs": "^6.3.3",
         "ts-node": "~7.0.1",
