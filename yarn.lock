@@ -269,19 +269,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/http@npm:^7.2.1":
-  version: 7.2.2
-  resolution: "@angular/http@npm:7.2.2"
-  dependencies:
-    tslib: ^1.9.0
-  peerDependencies:
-    "@angular/core": 7.2.2
-    "@angular/platform-browser": 7.2.2
-    rxjs: ^6.0.0
-  checksum: 07e846a9a027b51b138e4d97c2546179350e5be6de97760faabce81739c04bebd513e381b842e8ea369961e694ab9a20ba642d00bca2b6a5fe12e38546ce7b93
-  languageName: node
-  linkType: hard
-
 "@angular/language-service@npm:^8.2.14":
   version: 8.2.14
   resolution: "@angular/language-service@npm:8.2.14"
@@ -1575,7 +1562,6 @@ __metadata:
     "@angular/compiler-cli": ^8.2.14
     "@angular/core": ^8.2.14
     "@angular/forms": ^8.2.14
-    "@angular/http": ^7.2.1
     "@angular/language-service": ^8.2.14
     "@angular/platform-browser": ^8.2.14
     "@angular/platform-browser-dynamic": ^8.2.14
