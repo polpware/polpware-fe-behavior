@@ -497,8 +497,6 @@ __metadata:
     "@angular/platform-browser": ^7.2.1
     "@angular/platform-browser-dynamic": ^7.2.1
     "@angular/router": ^7.2.1
-    "@polpware/fe-dependencies": "https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git"
-    "@polpware/fe-utilities": "https://github.com/polpware-frontend-modules/polpware-fe-utilities.git"
     "@types/jasmine": 3.3.6
     "@types/node": ~10.12.18
     codelyzer: ^4.5.0
@@ -517,7 +515,6 @@ __metadata:
     karma-jasmine: ~2.0.1
     karma-jasmine-html-reporter: ^1.4.0
     ng-packagr: ^4.2.0
-    polpware-tinymce-tailor: "https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git"
     protractor: ~5.4.2
     rxjs: ^6.3.3
     ts-node: ~7.0.1
@@ -525,41 +522,10 @@ __metadata:
     tslib: ^1.9.0
     tslint: ~5.12.1
     typedoc: ^0.14.2
-    typescript: 3.2.x
+    typescript: ~3.5.0
     zone.js: ^0.8.28
-  peerDependencies:
-    "@polpware/fe-dependencies": "*"
-    "@polpware/fe-utilities": "*"
-    polpware-tinymce-tailor: "*"
   languageName: unknown
   linkType: soft
-
-"@polpware/fe-dependencies@https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git":
-  version: 1.4.1
-  resolution: "@polpware/fe-dependencies@https://github.com/polpware-frontend-modules/polpware-fe-dependencies.git#commit=cd9bb47709df6798b0703356f321359d01acc904"
-  dependencies:
-    backbone: ^1.3.3
-    backbone.paginator: ^2.0.8
-    constraintjs: "https://github.com/xlongtang/constraintjs.git"
-    javascript-state-machine: ^3.0.1
-    jquery: ^3.3.1
-    locache: "https://github.com/polpware/locache.git"
-    meld: ^1.3.2
-    model-js: ^0.2.5
-    polpware-tinymce-tailor: "https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git"
-    when: ^3.7.8
-  checksum: f3f21c70b982ee0e5ae358bcd7cec67c72dac7d495c00ea53affd43846571f48c732c6e251241f70e9e468703a8ebf30f73c8fcd1049dead535abae9d9bd8843
-  languageName: node
-  linkType: hard
-
-"@polpware/fe-utilities@https://github.com/polpware-frontend-modules/polpware-fe-utilities.git":
-  version: 3.0.0
-  resolution: "@polpware/fe-utilities@https://github.com/polpware-frontend-modules/polpware-fe-utilities.git#commit=227ddfc78eeb662f5ca42814cdaa0d05d32119f8"
-  dependencies:
-    tslib: ^1.9.0
-  checksum: a4c1e30387ed51ab5b68a19dbd8c6922e3f5ea93df47ef9af4c4c121946266d80137672dfc8e9cb067423da0cf9d693a665fe7567b63cc9af9a244f14309cb37
-  languageName: node
-  linkType: hard
 
 "@schematics/angular@npm:7.2.3":
   version: 7.2.3
@@ -1821,25 +1787,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"backbone.paginator@npm:^2.0.8":
-  version: 2.0.8
-  resolution: "backbone.paginator@npm:2.0.8"
-  dependencies:
-    backbone: 1.1.2 || 1.2.3 || ^1.3.2
-    underscore: ^1.8.0
-  checksum: c9c091763cf1d25a98160444fdc4a52cd67f98974b03443c9b1cccb0698145515ecd4d558f78b58194227754ea31db23bf537298231b55308c5016d9edf5ecc1
-  languageName: node
-  linkType: hard
-
-"backbone@npm:1.1.2 || 1.2.3 || ^1.3.2, backbone@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "backbone@npm:1.3.3"
-  dependencies:
-    underscore: ">=1.8.3"
-  checksum: 8bbc3f3150e25dac1a21b8cb8098eef3145d2e43be761d92645579731a8153814ab41b3863fab1d79951d10eae8d8add7b5fcdffb16f33e768f04bc88dfa999d
-  languageName: node
-  linkType: hard
-
 "backo2@npm:1.0.2":
   version: 1.0.2
   resolution: "backo2@npm:1.0.2"
@@ -2951,13 +2898,6 @@ __metadata:
   version: 1.0.0
   resolution: "constants-browserify@npm:1.0.0"
   checksum: f7ac8c6d0b6e4e0c77340a1d47a3574e25abd580bfd99ad707b26ff7618596cf1a5e5ce9caf44715e9e01d4a5d12cb3b4edaf1176f34c19adb2874815a56e64f
-  languageName: node
-  linkType: hard
-
-"constraintjs@https://github.com/xlongtang/constraintjs.git":
-  version: 0.9.7-beta
-  resolution: "constraintjs@https://github.com/xlongtang/constraintjs.git#commit=7bcd08bd9fbd6596dd978b201410fab502873f4e"
-  checksum: b238dc90c146b17d10a07978d4ecad2b28983271a35445c55f0dd72f1f579e98ef2e81eda9eafa50a5b12349f4e0bd838ae65206dac896ba0dc59c9148b45eaa
   languageName: node
   linkType: hard
 
@@ -6620,20 +6560,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"javascript-state-machine@npm:^3.0.1":
-  version: 3.1.0
-  resolution: "javascript-state-machine@npm:3.1.0"
-  checksum: 4510b6bace3659f0eda48fffeb03e54792a1c1f1872e81582b981a79f8cc2029189ed735be0ef8926a66e86189162b1e7f82521dd1d633becc1f84a0a09c0a39
-  languageName: node
-  linkType: hard
-
-"jquery@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "jquery@npm:3.3.1"
-  checksum: 8327a8150afa187131c0ef313ba768993bd7e410dcfb4fc2d9f3f085d1519a4bea08b7a7468ae971d2b8cb3796348f221a9e1ab408287a060d24bf5069ddca82
-  languageName: node
-  linkType: hard
-
 "js-base64@npm:^2.1.8":
   version: 2.5.1
   resolution: "js-base64@npm:2.5.1"
@@ -7193,13 +7119,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"locache@https://github.com/polpware/locache.git":
-  version: 0.5.0
-  resolution: "locache@https://github.com/polpware/locache.git#commit=f93bb35868e541165de076d63bda399df6d83a08"
-  checksum: c4d702b2a96e8f6b5ef456c5829a10b142a28dd5f64d456f66514a337c9d2e7fffc727292f51e97f446367f352982b889467ce287d8b41a772fcb1beda7bdcba
-  languageName: node
-  linkType: hard
-
 "locate-path@npm:^2.0.0":
   version: 2.0.0
   resolution: "locate-path@npm:2.0.0"
@@ -7504,13 +7423,6 @@ __metadata:
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
   checksum: af1b38516c28ec95d6b0826f6c8f276c58aec391f76be42aa07646b4e39d317723e869700933ca6995b056db4b09a78c92d5440dc23657e6764be5d28874bba1
-  languageName: node
-  linkType: hard
-
-"meld@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "meld@npm:1.3.2"
-  checksum: 50a89f81bb60880a79c757715b169b7269c840c9e90b82d1dc966e0304b581988e1c676c606a25c191c21c6ad09177abee5cbd99d703d45ad20608676a65ddce
   languageName: node
   linkType: hard
 
@@ -7910,13 +7822,6 @@ __metadata:
   bin:
     mkdirp: bin/cmd.js
   checksum: a96865108c6c3b1b8e1d5e9f11843de1e077e57737602de1b82030815f311be11f96f09cce59bd5b903d0b29834733e5313f9301e3ed6d6f6fba2eae0df4298f
-  languageName: node
-  linkType: hard
-
-"model-js@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "model-js@npm:0.2.5"
-  checksum: 2e0fbd5e027a52f4db32abe514a800c48ee1bb3097a573b54384727ece703b877f45085395bacda7b5b1daf95521f6005452cd81361837b95acea6ce411e191b
   languageName: node
   linkType: hard
 
@@ -9265,13 +9170,6 @@ __metadata:
     chalk: ^1.1.1
     dateformat: ^1.0.11
   checksum: af8cf5df4360e393d3089a50a6249b441f8e24680d9a53d9cb5797c82f6c2de978b711bbc096c01165825b102b6b8517178ce8a74e3a13a6be332df99e2e3afa
-  languageName: node
-  linkType: hard
-
-"polpware-tinymce-tailor@https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git":
-  version: 4.7.9
-  resolution: "polpware-tinymce-tailor@https://github.com/polpware-frontend-modules/polpware-tinymce-tailor.git#commit=6a39ec1ec7a4069901f343e350b5616595ae60b0"
-  checksum: d797b079e8a34c8f616a419783ee09e7ee2ac608e9cd98c5e55ce554d4eb978cb77c322cbdee7297521933d36bda2e9cb07d4feb5df64d9a98690edaa506f590
   languageName: node
   linkType: hard
 
@@ -12022,6 +11920,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:~3.5.0":
+  version: 3.5.3
+  resolution: "typescript@npm:3.5.3"
+  bin:
+    tsc: ./bin/tsc
+    tsserver: ./bin/tsserver
+  checksum: 791e50b385843a18dcb31845d889d7ece94a3984b9ef3ba63213e63027ef382c204ed133c337e6cbd8480293406117a642abfa4551e362cd608c1370bf9d1873
+  languageName: node
+  linkType: hard
+
 "typescript@patch:typescript@3.2.2#~builtin<compat/typescript>":
   version: 3.2.2
   resolution: "typescript@patch:typescript@npm%3A3.2.2#~builtin<compat/typescript>::version=3.2.2&hash=bda367"
@@ -12039,6 +11947,16 @@ __metadata:
     tsc: ./bin/tsc
     tsserver: ./bin/tsserver
   checksum: 334d9b44edceb83409983b66072c1b6e2ec8e2fa1d88b075980a0a0f6492f5fe8cfa718a65b568c5cf3c049de20245c0b3be0482f26f850cbb63226ba424ad1b
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@~3.5.0#~builtin<compat/typescript>":
+  version: 3.5.3
+  resolution: "typescript@patch:typescript@npm%3A3.5.3#~builtin<compat/typescript>::version=3.5.3&hash=bda367"
+  bin:
+    tsc: ./bin/tsc
+    tsserver: ./bin/tsserver
+  checksum: 25f4c30cdea108afee2d9d920b9215ba83e286e2c79502d484ac5acec3d64f5fac62ca741791cf65543d7de1d1a67874133a84b409d29b5dcd47f1f5e4615e21
   languageName: node
   linkType: hard
 
@@ -12065,13 +11983,6 @@ __metadata:
   version: 0.1.2
   resolution: "unc-path-regex@npm:0.1.2"
   checksum: a05fa2006bf4606051c10fc7968f08ce7b28fa646befafa282813aeb1ac1a56f65cb1b577ca7851af2726198d59475bb49b11776036257b843eaacee2860a4ec
-  languageName: node
-  linkType: hard
-
-"underscore@npm:>=1.8.3, underscore@npm:^1.8.0":
-  version: 1.9.1
-  resolution: "underscore@npm:1.9.1"
-  checksum: bee6f587661a6a9ca2f77e611896141e0287af51d8ca6034b11d0d4163ddbdd181a9720078ddbe94d265b7694f4880bc7f4c2ad260cfb8985ee2f9adcf13df03
   languageName: node
   linkType: hard
 
@@ -12645,13 +12556,6 @@ __metadata:
   version: 0.1.3
   resolution: "websocket-extensions@npm:0.1.3"
   checksum: 453d51465b7bad037da41621d32fa65f04396f7d6d4cfeb707a33f24c0d6610e1bf8eee5e83339150efb4d5bed344c54028a310e9019cad79f43d06b78d87bef
-  languageName: node
-  linkType: hard
-
-"when@npm:^3.7.8":
-  version: 3.7.8
-  resolution: "when@npm:3.7.8"
-  checksum: 1f7a3d4a125c61108c51a58b7e42350d290f0595c42fb864a38d403101b40ede28d29068c9f7a8c3e4e0128f2050f7cc68c7e82b3a39a9156f6929fc69bf42fb
   languageName: node
   linkType: hard
 

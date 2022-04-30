@@ -54,7 +54,7 @@
         "tslib": "^1.9.0",
         "tslint": "~5.12.1",
         "typedoc": "^0.14.2",
-        "typescript": "3.2.x",
+        "typescript": "~3.5.0",
         "zone.js": "^0.8.28"
     },
     "packageManager": "yarn@3.2.0"
